@@ -83,11 +83,11 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Parenthetical") {
 
     it("is fine to surround expressions with parentheses") {
-      program("(1)") should parseAs ( 1 )
+      program("(1)") should parseAs ( Paren(1) )
     }
     
     it("affects associativity") {
-      program("1 * (2 + 3)") should parseAs ( 1 |*| (2 |+| 3) )
+      program("1 * (2 + 3)") should parseAs ( 1 |*| Paren(2 |+| 3) )
     }
 
   }

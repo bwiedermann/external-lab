@@ -15,15 +15,15 @@ object CalcParser extends JavaTokenParsers with PackratParsers {
         | term )
         
     // terms
-    lazy val term: PackratParser[Expr] = 
+    lazy val term: PackratParser[Term] = 
       (   term~"*"~fact ^^ {case l~"*"~r ⇒ l |*| r}
        |  term~"/"~fact ^^ {case l~"/"~r ⇒ l |/| r}
        | fact )
         
     // factors
-    lazy val fact: PackratParser[Expr] =
+    lazy val fact: PackratParser[Fact] =
       (   number
-        | "("~>expr<~")" )
+        | "("~>expr<~")" ^^ Paren)
       
     // numbers
     def number: Parser[Num] = wholeNumber ^^ {s ⇒ Num(s.toInt)}

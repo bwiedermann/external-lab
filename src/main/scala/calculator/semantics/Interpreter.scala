@@ -9,5 +9,6 @@ package object semantics {
     case Sub(left, right)  ⇒ eval(left) - eval(right)
     case Mult(left, right) ⇒ eval(left) * eval(right)
     case Div(left, right)  ⇒ eval(left) / eval(right)
+    case Paren(e)          ⇒ eval(e)
   }
 }
